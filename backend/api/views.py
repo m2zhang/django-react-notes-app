@@ -8,5 +8,5 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 # inhereting from django's generic views
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = User # tells this view what kind of data we need to accept to make a new user 
+    serializer_class = UserSerializer # tells this view what kind of data we need to accept to make a new user 
     permission_classes = [AllowAny] # anyone can make an acct
