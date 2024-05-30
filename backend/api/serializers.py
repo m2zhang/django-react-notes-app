@@ -18,7 +18,9 @@ class UserSerializer(serializers.ModelSerializer):
         def create(self, validated_data):
             user = User.objects.create_user(**validated_data)
             return user # implementing a method to create new version of a user
+        
         # **: This syntax is used to unpack a dictionary into keyword arguments.
+        
         # For ex, if validated_data is {'username': 'bob', 'password': 'securepassword'},
         # the **validated_data syntax unpacks this dictionary so it effectively calls the
         # create_user method like this: create_user(username='bob', password='securepassword').
