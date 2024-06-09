@@ -26,4 +26,7 @@ urlpatterns = [
     path("api/token/", TokenObtainPairView.as_view(), name="get_token"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="refresh_token"),
     path("api-auth/", include("rest_framework.urls")),
+    path("api/", include("api.urls")),
+        # (i/ii) whenever we got to api/ and didn't match with any of
+        # the api/smth above, we'll take the remainder of the path and forward it to the api>urls.py file where we'll parse the rest
 ]
