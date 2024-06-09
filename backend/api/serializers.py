@@ -15,9 +15,9 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True}}
         # No one can read what the password is when a user creates an acct
 
-        def create(self, validated_data):
-            user = User.objects.create_user(**validated_data)
-            return user # implementing a method to create new version of a user
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user # implementing a method to create new version of a user
         
         # **: This syntax is used to unpack a dictionary into keyword arguments.
         
