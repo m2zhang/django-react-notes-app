@@ -10,7 +10,7 @@
  (so that they can actually access, say the notes page!) in the header
  */
 
- api.interceptors.request.use(
+ api.interceptors.request.use( // explain this api!!
     (config) => {
         // Look in local storage for any access token. If do, we'll add it as an authorization header to the request
         const token = localStorage.getItem(ACCESS_TOKEN);
