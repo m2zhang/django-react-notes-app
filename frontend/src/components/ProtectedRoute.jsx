@@ -4,10 +4,17 @@ import {Navigate} from "react-router-dom"
 import {jwtDecode} from "jwt-decode"
 import api from "../api"
 import { REFRESH_TOKEN, ACCESS_TOKEN  } from "../constants"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function ProtectedRoute({children}){
     const [isAuthorized, setIsAuthorized] = useState(null)
+
+    // the callback function is an arrow function that calls the auth function
+    // which is executed after the component has rendered.
+    useEffect(()=> {
+        auth().catch(()=> setIsAuthorized(false)) // the "catch" blockif auth() fails, as indicated by catch()
+    }, [])
+    // The second argument is an array of dependencies. If this array is empty, the effect runs only once, after the initial render.
 
     const refreshToken = async () => {
         const refreshToken = localStorage.getItem(REFRESH_TOKEN)
@@ -15,7 +22,7 @@ function ProtectedRoute({children}){
             const res = await api.post("/api/token/refresh/", {
                 refresh: refreshToken, // to get new access token
             });
-            if (res.status == 200){ // i.e successful
+            if (res.status == 200){ // i.e successful in getting new access token
                 localStorage.setItem(ACCESS_TOKEN, res.data.access)
                 setIsAuthorized(true)
             } else{
