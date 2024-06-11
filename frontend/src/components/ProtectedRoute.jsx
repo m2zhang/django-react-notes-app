@@ -1,7 +1,7 @@
 // Wrapper for a protected route (means you'll need an authorization token before you can actually access this route)
 // Otherwise you need to tell someone to login
-import {Navigate} from "react-router-dom"
-import {jwtDecode} from "jwt-decode"
+import { Navigate } from "react-router-dom"
+import { jwtDecode } from "jwt-decode"
 import api from "../api"
 import { REFRESH_TOKEN, ACCESS_TOKEN  } from "../constants"
 import { useState, useEffect } from "react"
@@ -22,7 +22,7 @@ function ProtectedRoute({children}){
         try {     
             const res = await api.post("/api/token/refresh/", {
                 refresh: refreshToken, // to get new access token
-            });
+            }); 
             if (res.status == 200){ // i.e successful in getting new access token
                 localStorage.setItem(ACCESS_TOKEN, res.data.access)
                 setIsAuthorized(true)
@@ -44,9 +44,9 @@ function ProtectedRoute({children}){
             setIsAuthorized(false)
             return
         }
-        const decoded = jwtDecode(token) // gives us access to the value
+        const decoded = jwtDecode(token) // gives us access to the value of token
         const tokenExpiration = decoded.exp
-        const now = Date.now()/1000 // in seconds
+        const now = Date.now()/1000 // in seconds, not milli-seconds
 
         if (tokenExpiration < now){
             await refreshToken()
@@ -58,7 +58,7 @@ function ProtectedRoute({children}){
     if (isAuthorized=== null){
         return <div>Loading...</div>
     }
-    return isAuthorized ? children : <Navigate to="/login" />
+    return isAuthorized ? children : <Navigate to="/login" />;
     // if? else: 
 }
 
