@@ -6,6 +6,7 @@ import api from "../api"
 import { REFRESH_TOKEN, ACCESS_TOKEN  } from "../constants"
 import { useState, useEffect } from "react"
 
+// the children in this case are the nest pages we are trying to "protect"
 function ProtectedRoute({children}){
     const [isAuthorized, setIsAuthorized] = useState(null)
 
