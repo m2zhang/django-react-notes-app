@@ -16,7 +16,7 @@ function ProtectedRoute({children}){
     }, [])
     // The second argument is an array of dependencies. If this array is empty, the effect runs only once, after the initial render.
 
-    const refreshToken = async () => {
+    const refreshToken = async () => { // See if we have a token
         const refreshToken = localStorage.getItem(REFRESH_TOKEN)
         try {     
             const res = await api.post("/api/token/refresh/", {
