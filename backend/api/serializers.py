@@ -29,5 +29,5 @@ class NoteSerializer(serializers.ModelSerializer):
             class Meta:
                 model = Note
                 fields = ["id", "title", "content", "created_at", "author"]
-                extra_kwargs = {"author": {"read-only": True}} # Specifying we can't write//change who the author is of a notes
+                extra_kwargs = {"author": {"read_only": True}} # Specifying we can't write//change who the author is of a notes
                 # Aka: We can see it but can't set it
