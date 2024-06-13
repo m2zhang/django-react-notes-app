@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // a hook to access the navigation code
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css";
+import LoadingIndicator from "./LoadingIndicator";
 
 function Form({route, method}){
     // the route we want to go to, and method is for choosing login/signup
@@ -54,6 +55,7 @@ function Form({route, method}){
             onChange={(e)=> setPassword(e.target.value)}
             placeholder="Password"
         /> 
+        {loading && <LoadingIndicator/>} 
         <button className="form-button" type="submit">
             {name}
         </button> 
