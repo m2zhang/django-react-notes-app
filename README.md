@@ -1,2 +1,2 @@
-# django-react
+# django-react notes app
 
