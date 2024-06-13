@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../api";
+import Note from "../components/Note";
 
 function Home() {
   const [notes, setNotes] = useState([]);
@@ -24,13 +25,14 @@ function Home() {
 
   const deleteNote = (id) => {
     api
-      .delete(`/api/notes/delete/${id}`)
+      .delete(`/api/notes/delete/${id}/`) //omg the slash at the end is necessary
       .then((res) => {
         if (res.status == 204) alert("Note deleted!");
         else alert("Failed to delete note.");
+        getNotes(); // to update the notes now. Technically you could/should use JS on the frontend, but too much hassle
       })
       .catch((error) => alert(error));
-    getNotes(); // to update the notes now. Technically you could/should use JS on the frontend, but too much hassle
+    // to update the notes now. Technically you could/should use JS on the frontend, but too much hassle
   };
 
   const createNote = (e) => {
@@ -40,15 +42,18 @@ function Home() {
       .then((res) => {
         if (res.status == 201) alert("Note created!");
         else alert("Failed to make note.");
+        getNotes();
       })
       .catch((err) => alert(err));
-    getNotes();
   };
 
   return (
     <div>
       <div>
         <h2>Notes</h2>
+        {notes.map((note) => (
+          <Note note={note} onDelete={deleteNote} key={note.id} />
+        ))}
       </div>
       <h2>Create a Note</h2>
       <form onSubmit={createNote}>
