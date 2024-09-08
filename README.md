@@ -6,7 +6,7 @@ To see this in action, follow these steps:
 2. In one terminal, run "cd backend"
      - Then enter "python manage.py runserver"
 3. In the other termina., run "cd frontend"
-     - Then enter "npm run dev"
+     - Then enter "npm install" followeed by "npm run dev"
 
 Navigate to the url loaded and add /register to the url to begin!
 
